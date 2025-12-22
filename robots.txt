@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://raw.githubusercontent.com/kk2056/Unblocked-Games-16-/main/public/sitemap.xml
