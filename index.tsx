@@ -1,4 +1,5 @@
 
+
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -11,7 +12,7 @@ interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends React.Component<Props, State> {
   public state: State = {
     hasError: false
   };
@@ -39,7 +40,7 @@ class ErrorBoundary extends Component<Props, State> {
       );
     }
 
-    // Fix: Access children from props
+    // Accessing children from props which are correctly typed via inheritance from React.Component
     return this.props.children;
   }
 }

@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Game } from './types';
 
 // Real-world pattern URLs for unblocked games
@@ -51,7 +51,7 @@ const Header: React.FC<{ onSearch: (val: string) => void }> = ({ onSearch }) => 
 
 const AdBanner: React.FC = () => (
   <div className="w-full max-w-7xl mx-auto my-6 p-10 bg-gray-800 border border-dashed border-gray-700 flex items-center justify-center text-gray-500 rounded-lg">
-    <span className="font-mono text-sm">[ ADVERTISEMENT PLACEHOLDER ]</span>
+    <span className="font-mono text-sm">[ TOP ADVERTISEMENT ]</span>
   </div>
 );
 
@@ -83,86 +83,129 @@ const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ ga
         </div>
       ))}
     </div>
-    {games.length === 0 && (
-      <div className="text-center py-20 text-gray-500">
-        NO GAMES FOUND. TRY ANOTHER SEARCH.
-      </div>
-    )}
   </div>
 );
 
-const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack }) => (
-  <div className="fixed inset-0 z-[60] bg-gray-950 flex flex-col overflow-y-auto">
-    <div className="sticky top-0 z-[70] bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center justify-between">
-      <div className="flex items-center space-x-4">
-        <button 
-          onClick={onBack}
-          className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm font-bold flex items-center transition-colors"
-        >
-          BACK TO GAMES
-        </button>
-        <h2 className="text-white font-bold hidden sm:block">{game.title}</h2>
-      </div>
-      <div className="flex items-center space-x-2">
-        <span className="bg-green-500 w-2 h-2 rounded-full animate-pulse"></span>
-        <span className="text-xs text-gray-400 uppercase font-bold">Live Server</span>
-      </div>
-    </div>
-    
-    <div className="w-full max-w-6xl mx-auto p-4 flex-1">
-      <div className="bg-black relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-        <iframe 
-          src={game.url} 
-          className="w-full h-full border-none"
-          title={game.title}
-          allowFullScreen
-        />
-      </div>
+const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack }) => {
+  // Trigger AdSense script on mount
+  useEffect(() => {
+    try {
+      // @ts-ignore
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.warn('AdSense script initialization failed:', err);
+    }
+  }, []);
 
-      {/* SEO & Strategy Section */}
-      <div className="strategy mt-8 text-gray-300 p-6 bg-gray-800 rounded-lg shadow-inner border border-gray-700 leading-relaxed">
-        <p className="mb-4">
-          If the original isn't enough, <strong>Drift Hunters MAX Unblocked 2025</strong> is your upgrade. This specific variant offers more track selections and unlocks premium supercars faster. Compared to the main site, this version focuses on the "Best" experience, with optimized grip physics making the drifting feel heavier and more realistic.
-        </p>
-        <p className="border-t border-gray-700 pt-4 font-medium">
-          <span className="text-blue-400 font-bold uppercase mr-2">Advanced Play:</span>
-          This version often includes hidden or special tracks like complex Docks or Mountain passes. Use the Handbrake (Space) to initiate, but master "Feathering the Throttle" (tapping W) to maintain the perfect angle. For players chasing the ultimate drift score without downloading heavy clients, this site offers pure driving pleasure.
-        </p>
-      </div>
+  const handleFullscreen = () => {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    }
+  };
 
-      {/* Internal Linking Section */}
-      <div className="other-games mt-8 bg-gray-900 p-6 rounded-lg shadow-lg border border-gray-700">
-        <h3 className="text-xl font-bold text-white mb-4 border-b border-gray-600 pb-2">More Unblocked Games 2025</h3>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 list-none">
-            <li className="mb-2"><a href="https://snakegame.cfd" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Snake Game Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://playzero2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Zero Lag Games Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://freegames2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Free Games Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://nodownload2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play No Download Games Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://unblocked2025.cfd" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Unblocked Games 2025 (Main)</a></li>
-            <li className="mb-2"><a href="https://unblocked2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Best Unblocked Games 2025</a></li>
-            <li className="mb-2"><a href="https://promax.it.com" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play ProMax Games Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://retrobowl2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Retro Bowl Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://1v1lol2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play 1v1.LOL Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://drift2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Drift Hunters Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://slope2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Slope Game Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://gd2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Geometry Dash Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://motox3m2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Moto X3M Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://surfers2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Subway Surfers Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://run32025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Run 3 Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://fireboy2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Fireboy & Watergirl Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://paperio2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Paper.io Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://driftbest2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Drift Hunters MAX Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://gd-full2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Geometry Dash Full Unblocked 2025</a></li>
-            <li className="mb-2"><a href="https://subway2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Subway Surfers World Unblocked 2025</a></li>
-        </ul>
+  return (
+    <div className="fixed inset-0 z-[60] bg-gray-950 flex flex-col overflow-y-auto">
+      <div className="sticky top-0 z-[70] bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <button 
+            onClick={onBack}
+            className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm font-bold flex items-center transition-colors"
+          >
+            BACK TO GAMES
+          </button>
+          <h2 className="text-white font-bold hidden sm:block">{game.title}</h2>
+        </div>
+        <div className="flex items-center space-x-2">
+          <span className="bg-green-500 w-2 h-2 rounded-full animate-pulse"></span>
+          <span className="text-xs text-gray-400 uppercase font-bold">Live Server</span>
+        </div>
       </div>
       
-      <div className="mt-12 mb-8 text-center text-xs text-gray-600 uppercase tracking-widest font-mono">
-        Running stable instance of {game.title} unblocked v.2025.03
+      <div className="w-full max-w-6xl mx-auto p-4 flex-1">
+        {/* Mobile Landscape Tip */}
+        <div className="text-center text-white bg-purple-800 p-4 rounded-lg mb-6 max-w-md mx-auto shadow-md border border-purple-600">
+          Tip: Rotate to landscape mode for better mobile experience! Perfect on phone or Chromebook.
+        </div>
+
+        {/* Fullscreen Controls */}
+        <div className="flex flex-col items-center">
+          <button 
+            onClick={handleFullscreen} 
+            className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl text-xl mb-6 shadow-lg transform transition-transform hover:scale-105"
+          >
+            Play Full Screen (Press F - Ultimate Experience!)
+          </button>
+          
+          <div className="text-center text-white bg-blue-800 p-4 rounded-lg mb-6 max-w-lg mx-auto shadow-md border border-blue-600">
+            Press F for fullscreen - No lag, full immersion on any device!
+          </div>
+        </div>
+
+        {/* Game Container */}
+        <div className="bg-black relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+          <iframe 
+            src={game.url} 
+            className="w-full h-full border-none"
+            title={game.title}
+            allowFullScreen
+          />
+        </div>
+
+        {/* Bottom AdSense Unit */}
+        <div className="ad-bottom mt-8 text-center bg-gray-900 p-2 rounded-lg border border-gray-800">
+          <ins className="adsbygoogle"
+               style={{ display: 'block' }}
+               data-ad-client="ca-pub-9774042341049510"
+               data-ad-slot="YOUR_AD_SLOT" // Replace with actual slot ID if available
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+        </div>
+
+        {/* SEO & Strategy Section */}
+        <div className="strategy mt-8 text-gray-300 p-6 bg-gray-800 rounded-lg shadow-inner border border-gray-700 leading-relaxed">
+          <p className="mb-4">
+            If the original isn't enough, <strong>Drift Hunters MAX Unblocked 2025</strong> is your upgrade. This specific variant offers more track selections and unlocks premium supercars faster. Compared to the main site, this version focuses on the "Best" experience, with optimized grip physics making the drifting feel heavier and more realistic.
+          </p>
+          <p className="border-t border-gray-700 pt-4 font-medium">
+            <span className="text-blue-400 font-bold uppercase mr-2">Advanced Play:</span>
+            This version often includes hidden or special tracks like complex Docks or Mountain passes. Use the Handbrake (Space) to initiate, but master "Feathering the Throttle" (tapping W) to maintain the perfect angle. For players chasing the ultimate drift score without downloading heavy clients, this site offers pure driving pleasure.
+          </p>
+        </div>
+
+        {/* Internal Linking Section */}
+        <div className="other-games mt-8 bg-gray-900 p-6 rounded-lg shadow-lg border border-gray-700">
+          <h3 className="text-xl font-bold text-white mb-4 border-b border-gray-600 pb-2">More Unblocked Games 2025</h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 list-none">
+              <li className="mb-2"><a href="https://snakegame.cfd" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Snake Game Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://playzero2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Zero Lag Games Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://freegames2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Free Games Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://nodownload2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play No Download Games Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://unblocked2025.cfd" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Unblocked Games 2025 (Main)</a></li>
+              <li className="mb-2"><a href="https://unblocked2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Best Unblocked Games 2025</a></li>
+              <li className="mb-2"><a href="https://promax.it.com" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play ProMax Games Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://retrobowl2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Retro Bowl Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://1v1lol2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play 1v1.LOL Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://drift2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Drift Hunters Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://slope2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Slope Game Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://gd2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Geometry Dash Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://motox3m2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Moto X3M Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://surfers2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Subway Surfers Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://run32025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Run 3 Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://fireboy2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Fireboy & Watergirl Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://paperio2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Paper.io Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://driftbest2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Drift Hunters MAX Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://gd-full2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Geometry Dash Full Unblocked 2025</a></li>
+              <li className="mb-2"><a href="https://subway2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Subway Surfers World Unblocked 2025</a></li>
+          </ul>
+        </div>
+        
+        <div className="mt-12 mb-8 text-center text-xs text-gray-600 uppercase tracking-widest font-mono">
+          Running stable instance of {game.title} unblocked v.2025.03
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const App: React.FC = () => {
   const [selectedGame, setSelectedGame] = useState<Game | null>(null);
