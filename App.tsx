@@ -87,7 +87,7 @@ const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ ga
 );
 
 const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack }) => {
-  // Trigger AdSense script on mount
+  // Trigger AdSense script on mount for bottom ad
   useEffect(() => {
     try {
       // @ts-ignore
@@ -123,22 +123,21 @@ const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack
       
       <div className="w-full max-w-6xl mx-auto p-4 flex-1">
         {/* Mobile Landscape Tip */}
-        <div className="text-center text-white bg-purple-800 p-4 rounded-lg mb-6 max-w-md mx-auto shadow-md border border-purple-600">
-          Tip: Rotate to landscape mode for better mobile experience! Perfect on phone or Chromebook.
+        <div className="text-center text-white bg-purple-800 p-4 rounded-lg mb-6 max-w-md mx-auto">
+          Tip: Rotate to landscape for better mobile experience! Perfect on phone or Chromebook.
         </div>
 
-        {/* Fullscreen Controls */}
-        <div className="flex flex-col items-center">
-          <button 
-            onClick={handleFullscreen} 
-            className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl text-xl mb-6 shadow-lg transform transition-transform hover:scale-105"
-          >
-            Play Full Screen (Press F - Ultimate Experience!)
-          </button>
-          
-          <div className="text-center text-white bg-blue-800 p-4 rounded-lg mb-6 max-w-lg mx-auto shadow-md border border-blue-600">
-            Press F for fullscreen - No lag, full immersion on any device!
-          </div>
+        {/* Optimized Fullscreen Button */}
+        <button 
+          onClick={handleFullscreen} 
+          className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl text-xl mb-6 shadow-lg"
+        >
+          Play Full Screen (Press F - Ultimate Experience!)
+        </button>
+
+        {/* Fullscreen Tip Text */}
+        <div className="text-center text-white bg-blue-800 p-4 rounded-lg mb-6 max-w-lg mx-auto">
+          Press F for fullscreen - No lag, full immersion on any device!
         </div>
 
         {/* Game Container */}
@@ -151,25 +150,20 @@ const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack
           />
         </div>
 
-        {/* Bottom AdSense Unit */}
-        <div className="ad-bottom mt-8 text-center bg-gray-900 p-2 rounded-lg border border-gray-800">
+        {/* Extra AdSense Ad Slot */}
+        <div className="ad-bottom mt-8 text-center">
           <ins className="adsbygoogle"
-               style={{ display: 'block' }}
+               style={{ display: "block" }}
                data-ad-client="ca-pub-9774042341049510"
-               data-ad-slot="YOUR_AD_SLOT" // Replace with actual slot ID if available
                data-ad-format="auto"
                data-full-width-responsive="true"></ins>
         </div>
 
-        {/* SEO & Strategy Section */}
-        <div className="strategy mt-8 text-gray-300 p-6 bg-gray-800 rounded-lg shadow-inner border border-gray-700 leading-relaxed">
-          <p className="mb-4">
-            If the original isn't enough, <strong>Drift Hunters MAX Unblocked 2025</strong> is your upgrade. This specific variant offers more track selections and unlocks premium supercars faster. Compared to the main site, this version focuses on the "Best" experience, with optimized grip physics making the drifting feel heavier and more realistic.
-          </p>
-          <p className="border-t border-gray-700 pt-4 font-medium">
-            <span className="text-blue-400 font-bold uppercase mr-2">Advanced Play:</span>
-            This version often includes hidden or special tracks like complex Docks or Mountain passes. Use the Handbrake (Space) to initiate, but master "Feathering the Throttle" (tapping W) to maintain the perfect angle. For players chasing the ultimate drift score without downloading heavy clients, this site offers pure driving pleasure.
-          </p>
+        {/* Strategy Section */}
+        <div className="strategy mt-8 text-gray-300 p-4 bg-gray-800 rounded-lg shadow-inner border border-gray-700">
+          If the original isn't enough, Drift Hunters MAX Unblocked 2025 is your upgrade. This specific variant offers more track selections and unlocks premium supercars faster. Compared to the main site, this version focuses on the "Best" experience, with optimized grip physics making the drifting feel heavier and more realistic.
+          <br /><br />
+          Advanced Play: This version often includes hidden or special tracks like complex Docks or Mountain passes. Use the Handbrake (Space) to initiate, but master "Feathering the Throttle" (tapping W) to maintain the perfect angle. For players chasing the ultimate drift score without downloading heavy clients, this site offers pure driving pleasure.
         </div>
 
         {/* Internal Linking Section */}

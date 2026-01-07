@@ -1,5 +1,3 @@
-
-
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -12,7 +10,8 @@ interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<Props, State> {
+// Extends Component directly to ensure TypeScript correctly identifies inherited properties like 'this.props'
+class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false
   };
@@ -40,7 +39,7 @@ class ErrorBoundary extends React.Component<Props, State> {
       );
     }
 
-    // Accessing children from props which are correctly typed via inheritance from React.Component
+    // Accessing children from props which are correctly typed via inheritance from Component
     return this.props.children;
   }
 }
