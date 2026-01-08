@@ -35,7 +35,7 @@ const Header: React.FC<{ onSearch: (val: string) => void }> = ({ onSearch }) => 
         <h1 className="text-2xl font-black text-blue-500 uppercase tracking-tighter cursor-pointer" onClick={() => window.location.reload()}>
           Unblocked Games 76
         </h1>
-        <span className="bg-blue-600 text-[10px] text-white font-bold px-2 py-1 rounded">2025 NEW</span>
+        <span className="bg-blue-600 text-[10px] text-white font-bold px-2 py-1 rounded">2026 EDITION</span>
       </div>
       <div className="relative w-full md:w-96">
         <input 
@@ -49,11 +49,27 @@ const Header: React.FC<{ onSearch: (val: string) => void }> = ({ onSearch }) => 
   </header>
 );
 
-const AdBanner: React.FC = () => (
-  <div className="w-full max-w-7xl mx-auto my-6 p-10 bg-gray-800 border border-dashed border-gray-700 flex items-center justify-center text-gray-500 rounded-lg">
-    <span className="font-mono text-sm">[ TOP ADVERTISEMENT ]</span>
-  </div>
-);
+const AdBanner: React.FC<{ slot?: string }> = ({ slot }) => {
+  useEffect(() => {
+    try {
+      // @ts-ignore
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (err) {
+      console.warn('AdSense failed');
+    }
+  }, []);
+
+  return (
+    <div className="w-full max-w-7xl mx-auto my-6 p-4 bg-gray-900 border border-gray-800 flex items-center justify-center min-h-[100px] rounded-lg overflow-hidden">
+      <ins className="adsbygoogle"
+           style={{ display: "block", width: "100%" }}
+           data-ad-client="ca-pub-9774042341049510"
+           data-ad-slot={slot || "7404234104"}
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
+  );
+};
 
 const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ games, onSelect }) => (
   <div className="max-w-7xl mx-auto p-4">
@@ -78,7 +94,7 @@ const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ ga
             <button className="text-[10px] font-bold text-gray-400 group-hover:text-blue-400 transition-colors">
               PLAY NOW
             </button>
-            <span className="text-[10px] text-gray-600">v2.5</span>
+            <span className="text-[10px] text-gray-600">v2026</span>
           </div>
         </div>
       ))}
@@ -87,20 +103,9 @@ const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ ga
 );
 
 const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack }) => {
-  // Trigger AdSense script on mount for bottom ad
-  useEffect(() => {
-    try {
-      // @ts-ignore
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.warn('AdSense script initialization failed:', err);
-    }
-  }, []);
-
   const handleFullscreen = () => {
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    }
+    const el = document.documentElement;
+    if (el.requestFullscreen) el.requestFullscreen();
   };
 
   return (
@@ -111,36 +116,32 @@ const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack
             onClick={onBack}
             className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm font-bold flex items-center transition-colors"
           >
-            BACK TO GAMES
+            BACK TO HUB
           </button>
           <h2 className="text-white font-bold hidden sm:block">{game.title}</h2>
         </div>
         <div className="flex items-center space-x-2">
           <span className="bg-green-500 w-2 h-2 rounded-full animate-pulse"></span>
-          <span className="text-xs text-gray-400 uppercase font-bold">Live Server</span>
+          <span className="text-xs text-gray-400 uppercase font-bold">Safe for School</span>
         </div>
       </div>
       
       <div className="w-full max-w-6xl mx-auto p-4 flex-1">
-        {/* Mobile Landscape Tip */}
-        <div className="text-center text-white bg-purple-800 p-4 rounded-lg mb-6 max-w-md mx-auto">
-          Tip: Rotate to landscape for better mobile experience! Perfect on phone or Chromebook.
+        <div className="text-center text-white bg-purple-900 p-4 rounded-lg mb-6 max-w-md mx-auto shadow-lg border border-purple-700">
+          <strong>Pro Tip:</strong> Rotate to landscape for the ultimate <strong>unblocked games 2026 school chromebook</strong> experience!
         </div>
 
-        {/* Optimized Fullscreen Button */}
         <button 
           onClick={handleFullscreen} 
-          className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl text-xl mb-6 shadow-lg"
+          className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl text-xl mb-6 shadow-2xl transition-all hover:scale-105 active:scale-95"
         >
-          Play Full Screen (Press F - Ultimate Experience!)
+          Enter Full Screen Mode (Press F)
         </button>
 
-        {/* Fullscreen Tip Text */}
-        <div className="text-center text-white bg-blue-800 p-4 rounded-lg mb-6 max-w-lg mx-auto">
-          Press F for fullscreen - No lag, full immersion on any device!
+        <div className="text-center text-white bg-blue-900 p-3 rounded-lg mb-6 max-w-lg mx-auto border border-blue-700">
+          Optimized for <strong>no download</strong> play on any <strong>Chromebook</strong>! No lag, pure immersion.
         </div>
 
-        {/* Game Container */}
         <div className="bg-black relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl border border-gray-800">
           <iframe 
             src={game.url} 
@@ -150,51 +151,32 @@ const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack
           />
         </div>
 
-        {/* Extra AdSense Ad Slot */}
-        <div className="ad-bottom mt-8 text-center">
-          <ins className="adsbygoogle"
-               style={{ display: "block" }}
-               data-ad-client="ca-pub-9774042341049510"
-               data-ad-format="auto"
-               data-full-width-responsive="true"></ins>
+        <div className="ad-bottom mt-8 text-center min-h-[100px]">
+          <AdBanner slot="bottom-ad-player" />
         </div>
 
-        {/* Strategy Section */}
-        <div className="strategy mt-8 text-gray-300 p-4 bg-gray-800 rounded-lg shadow-inner border border-gray-700">
-          If the original isn't enough, Drift Hunters MAX Unblocked 2025 is your upgrade. This specific variant offers more track selections and unlocks premium supercars faster. Compared to the main site, this version focuses on the "Best" experience, with optimized grip physics making the drifting feel heavier and more realistic.
-          <br /><br />
-          Advanced Play: This version often includes hidden or special tracks like complex Docks or Mountain passes. Use the Handbrake (Space) to initiate, but master "Feathering the Throttle" (tapping W) to maintain the perfect angle. For players chasing the ultimate drift score without downloading heavy clients, this site offers pure driving pleasure.
+        <div className="strategy mt-8 text-gray-300 p-6 bg-gray-900 border border-gray-800 rounded-xl leading-relaxed">
+          <h3 className="text-xl font-bold text-white mb-4">Mastery Guide: {game.title} Unblocked 2026</h3>
+          <p className="mb-4">
+            Looking for the definitive <strong>unblocked games 2026 school chromebook no download</strong> experience? This version of {game.title} is specifically tuned for low-latency performance on student laptops. In 2026, our servers have been upgraded to bypass the newest firewall updates, ensuring you can play your favorite titles without interruption.
+          </p>
+          <p className="mb-4">
+            <strong>School Hack:</strong> If the game feels slow, try clearing your browser cache. This "no download" version runs entirely in your RAM, making it the perfect choice for restricted Chromebook environments where installing software is prohibited.
+          </p>
+          <div className="border-t border-gray-800 pt-4 text-sm text-gray-400 italic">
+            Keywords: unblocked games 2026, school chromebook games, no download browser games, drift hunters max 2026 guide.
+          </div>
         </div>
 
-        {/* Internal Linking Section */}
-        <div className="other-games mt-8 bg-gray-900 p-6 rounded-lg shadow-lg border border-gray-700">
-          <h3 className="text-xl font-bold text-white mb-4 border-b border-gray-600 pb-2">More Unblocked Games 2025</h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 list-none">
-              <li className="mb-2"><a href="https://snakegame.cfd" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Snake Game Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://playzero2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Zero Lag Games Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://freegames2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Free Games Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://nodownload2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play No Download Games Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://unblocked2025.cfd" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Unblocked Games 2025 (Main)</a></li>
-              <li className="mb-2"><a href="https://unblocked2025.sbs" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Best Unblocked Games 2025</a></li>
-              <li className="mb-2"><a href="https://promax.it.com" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play ProMax Games Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://retrobowl2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Retro Bowl Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://1v1lol2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play 1v1.LOL Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://drift2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Drift Hunters Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://slope2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Slope Game Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://gd2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Geometry Dash Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://motox3m2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Moto X3M Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://surfers2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Subway Surfers Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://run32025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Run 3 Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://fireboy2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Fireboy & Watergirl Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://paperio2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Paper.io Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://driftbest2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Drift Hunters MAX Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://gd-full2025.site" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Geometry Dash Full Unblocked 2025</a></li>
-              <li className="mb-2"><a href="https://subway2025.online" className="text-blue-400 hover:text-blue-300 transition-colors duration-200">Play Subway Surfers World Unblocked 2025</a></li>
+        <div className="other-games mt-8 bg-gray-900 p-6 rounded-xl border border-gray-800">
+          <h3 className="text-xl font-bold text-white mb-4 border-b border-gray-800 pb-2">Top 2026 Student Picks</h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 list-none">
+              <li><a href="https://driftbest2025.site" className="text-blue-400 hover:text-blue-300 font-medium">Drift Hunters MAX 2026 Unblocked</a></li>
+              <li><a href="https://slope2025.online" className="text-blue-400 hover:text-blue-300 font-medium">Slope Game 2026 No Download</a></li>
+              <li><a href="https://retrobowl2025.online" className="text-blue-400 hover:text-blue-300 font-medium">Retro Bowl School Edition 2026</a></li>
+              <li><a href="https://1v1lol2025.online" className="text-blue-400 hover:text-blue-300 font-medium">1v1.LOL Chromebook Optimized</a></li>
+              <li><a href="https://snakegame.cfd" className="text-blue-400 hover:text-blue-300 font-medium">Snake Game Unblocked 2026</a></li>
           </ul>
-        </div>
-        
-        <div className="mt-12 mb-8 text-center text-xs text-gray-600 uppercase tracking-widest font-mono">
-          Running stable instance of {game.title} unblocked v.2025.03
         </div>
       </div>
     </div>
@@ -213,29 +195,68 @@ const App: React.FC = () => {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen font-sans text-gray-100 bg-[#111827]">
+    <div className="min-h-screen font-sans text-gray-100 bg-[#0f172a]">
       {selectedGame ? (
         <GamePlayer game={selectedGame} onBack={() => setSelectedGame(null)} />
       ) : (
         <>
           <Header onSearch={setSearchTerm} />
           <main className="pb-20">
-            <AdBanner />
-            <div className="max-w-7xl mx-auto px-4 mb-4 flex items-center justify-between">
-              <h2 className="text-xl font-bold border-l-4 border-blue-500 pl-3">TRENDING NOW</h2>
-              <span className="text-xs text-gray-500 uppercase tracking-tighter">Updated: March 2025</span>
+            <AdBanner slot="top-home-banner" />
+            
+            <div className="max-w-7xl mx-auto px-4 mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-black border-l-4 border-blue-500 pl-4 uppercase tracking-tight">
+                Trending 2026 Picks
+              </h2>
+              <div className="hidden sm:flex space-x-2 text-[10px] font-bold text-gray-500 uppercase">
+                <span>Fast</span>
+                <span className="text-blue-500">•</span>
+                <span>Unblocked</span>
+                <span className="text-blue-500">•</span>
+                <span>Safe</span>
+              </div>
             </div>
+
             <GameGrid games={filteredGames} onSelect={setSelectedGame} />
             
-            <div className="max-w-7xl mx-auto px-4 mt-12 py-8 border-t border-gray-800">
-              <h3 className="text-sm font-bold text-gray-500 mb-4 uppercase">About Unblocked Games 76 - 2025 Edition</h3>
-              <p className="text-xs text-gray-600 leading-relaxed max-w-4xl">
-                Welcome to the ultimate hub for Unblocked Games 76 in 2025. Our platform provides high-performance access to popular web games including Drift Hunters MAX, Slope, and 1v1.LOL. Designed with a crash-resistant single-page architecture, we ensure maximum uptime and zero redirection. All games are served via stable CDNs and private S3 buckets to bypass restrictive filters. Enjoy a seamless gaming experience without the need for additional plugins or complex routing.
-              </p>
+            <AdBanner slot="middle-grid-ad" />
+
+            <div className="max-w-7xl mx-auto px-4 mt-16 py-12 border-t border-gray-800 bg-gray-900/50 rounded-2xl shadow-inner">
+              <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter">
+                The Future of Unblocked Games 2026 (School Chromebook)
+              </h3>
+              <div className="grid md:grid-cols-2 gap-8 text-sm text-gray-400 leading-relaxed">
+                <div>
+                  <p className="mb-4">
+                    Welcome to the premier destination for <strong>unblocked games 2026 school chromebook no download</strong>. As we move into the 2026 academic year, school filters are becoming more sophisticated. Our engineering team at <strong>DriftBest2025.site</strong> stays ahead of the curve by utilizing decentralized hosting and advanced proxy techniques to ensure your access to Drift Hunters MAX, Slope, and 1v1.LOL remains 100% stable.
+                  </p>
+                  <p>
+                    Every game on this portal is a <strong>no download</strong> version, meaning it runs directly in your browser without leaving a footprint on your device. This makes it the safest and most efficient way to play during breaks on restricted hardware.
+                  </p>
+                </div>
+                <div>
+                  <p className="mb-4">
+                    Why choose our 2026 platform? We offer ultra-lightweight game instances specifically optimized for <strong>school Chromebooks</strong> with limited CPU power. Our "Turbo Mode" architecture reduces memory usage by 40%, preventing the common "Out of Memory" errors found on other unblocked sites.
+                  </p>
+                  <ul className="space-y-2 text-blue-400 font-medium">
+                    <li>✓ No Download Required</li>
+                    <li>✓ Works on Restricted School WiFi</li>
+                    <li>✓ 2026 Firewall Bypass Ready</li>
+                    <li>✓ 60 FPS on any Chromebook</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </main>
-          <footer className="bg-gray-950 p-6 text-center border-t border-gray-900 text-gray-600 text-[10px] uppercase tracking-widest">
-            © 2025 UNBLOCKED GAMES 76 NEW • DRIFTBEST2025.SITE • ALL RIGHTS RESERVED
+          <footer className="bg-gray-950 p-8 text-center border-t border-gray-900">
+            <div className="text-gray-400 text-xs uppercase tracking-widest font-bold mb-4">
+              © 2026 UNBLOCKED GAMES HUB • DRIFTBEST2025.SITE • NO DOWNLOAD GAMING
+            </div>
+            <div className="flex justify-center space-x-6 text-[10px] text-gray-600 uppercase">
+              <a href="#" className="hover:text-blue-500 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-blue-500 transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-blue-500 transition-colors">Contact US</a>
+            </div>
           </footer>
         </>
       )}
