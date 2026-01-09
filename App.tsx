@@ -35,13 +35,13 @@ const Header: React.FC<{ onSearch: (val: string) => void }> = ({ onSearch }) => 
         <h1 className="text-2xl font-black text-blue-500 uppercase tracking-tighter cursor-pointer" onClick={() => window.location.reload()}>
           Unblocked Games 76
         </h1>
-        <span className="bg-blue-600 text-[10px] text-white font-bold px-2 py-1 rounded">2026 EDITION</span>
+        <span className="bg-blue-600 text-[10px] text-white font-bold px-2 py-1 rounded shadow-lg">2026 NEW</span>
       </div>
       <div className="relative w-full md:w-96">
         <input 
           type="text" 
-          placeholder="SEARCH GAMES..." 
-          className="w-full bg-gray-800 text-white px-4 py-2 rounded border border-gray-700 focus:outline-none focus:border-blue-500 transition-colors"
+          placeholder="SEARCH 2026 GAMES..." 
+          className="w-full bg-gray-800 text-white px-4 py-2 rounded border border-gray-700 focus:outline-none focus:border-blue-500 transition-all placeholder:text-gray-600"
           onChange={(e) => onSearch(e.target.value)}
         />
       </div>
@@ -55,14 +55,14 @@ const AdBanner: React.FC<{ slot?: string }> = ({ slot }) => {
       // @ts-ignore
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch (err) {
-      console.warn('AdSense failed');
+      console.warn('AdSense initialization suppressed or failed');
     }
   }, []);
 
   return (
-    <div className="w-full max-w-7xl mx-auto my-6 p-4 bg-gray-900 border border-gray-800 flex items-center justify-center min-h-[100px] rounded-lg overflow-hidden">
+    <div className="w-full max-w-7xl mx-auto my-6 p-4 bg-gray-900 border border-gray-800 flex items-center justify-center min-h-[100px] rounded-lg overflow-hidden shadow-inner">
       <ins className="adsbygoogle"
-           style={{ display: "block", width: "100%" }}
+           style={{ display: "block", width: "100%", minHeight: "90px" }}
            data-ad-client="ca-pub-9774042341049510"
            data-ad-slot={slot || "7404234104"}
            data-ad-format="auto"
@@ -78,7 +78,7 @@ const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ ga
         <div 
           key={game.id}
           onClick={() => onSelect(game)}
-          className="group cursor-pointer bg-gray-800 rounded-xl overflow-hidden hover:ring-2 hover:ring-blue-500 transition-all transform hover:-translate-y-1"
+          className="group cursor-pointer bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all transform hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10"
         >
           <div className="aspect-square bg-gray-700 flex items-center justify-center relative overflow-hidden">
             <span className="text-gray-500 font-bold opacity-20 text-4xl uppercase select-none">
@@ -91,10 +91,10 @@ const GameGrid: React.FC<{ games: Game[], onSelect: (g: Game) => void }> = ({ ga
             </div>
           </div>
           <div className="p-3 flex justify-between items-center bg-gray-800">
-            <button className="text-[10px] font-bold text-gray-400 group-hover:text-blue-400 transition-colors">
-              PLAY NOW
+            <button className="text-[10px] font-bold text-gray-400 group-hover:text-blue-400 transition-colors uppercase tracking-widest">
+              Free Play
             </button>
-            <span className="text-[10px] text-gray-600">v2026</span>
+            <span className="text-[10px] text-gray-600 font-mono">2026.v1</span>
           </div>
         </div>
       ))}
@@ -109,40 +109,46 @@ const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack
   };
 
   return (
-    <div className="fixed inset-0 z-[60] bg-gray-950 flex flex-col overflow-y-auto">
-      <div className="sticky top-0 z-[70] bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center justify-between">
+    <div className="fixed inset-0 z-[60] bg-[#020617] flex flex-col overflow-y-auto">
+      <div className="sticky top-0 z-[70] bg-gray-900 border-b border-gray-800 px-4 py-2 flex items-center justify-between shadow-2xl">
         <div className="flex items-center space-x-4">
           <button 
             onClick={onBack}
-            className="text-white bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded text-sm font-bold flex items-center transition-colors"
+            className="text-white bg-gray-800 hover:bg-gray-700 px-5 py-2 rounded-lg text-sm font-bold flex items-center transition-all border border-gray-700"
           >
-            BACK TO HUB
+            ← BACK TO HUB
           </button>
-          <h2 className="text-white font-bold hidden sm:block">{game.title}</h2>
+          <h2 className="text-white font-black text-lg hidden sm:block uppercase tracking-tight">{game.title}</h2>
         </div>
-        <div className="flex items-center space-x-2">
-          <span className="bg-green-500 w-2 h-2 rounded-full animate-pulse"></span>
-          <span className="text-xs text-gray-400 uppercase font-bold">Safe for School</span>
+        <div className="flex items-center space-x-3">
+          <div className="flex items-center bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20">
+            <span className="bg-green-500 w-2 h-2 rounded-full animate-pulse mr-2"></span>
+            <span className="text-[10px] text-green-500 uppercase font-black">2026 Bypass Active</span>
+          </div>
         </div>
       </div>
       
       <div className="w-full max-w-6xl mx-auto p-4 flex-1">
-        <div className="text-center text-white bg-purple-900 p-4 rounded-lg mb-6 max-w-md mx-auto shadow-lg border border-purple-700">
-          <strong>Pro Tip:</strong> Rotate to landscape for the ultimate <strong>unblocked games 2026 school chromebook</strong> experience!
+        <div className="text-center text-white bg-gradient-to-r from-purple-900 to-indigo-900 p-4 rounded-xl mb-6 max-w-md mx-auto shadow-2xl border border-purple-500/30">
+          <p className="text-sm font-medium">
+            <strong>Pro Tip:</strong> Rotate to landscape for the ultimate <strong>unblocked games 2026 school chromebook no download free play</strong> experience!
+          </p>
         </div>
 
         <button 
           onClick={handleFullscreen} 
-          className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-8 rounded-xl text-xl mb-6 shadow-2xl transition-all hover:scale-105 active:scale-95"
+          className="block mx-auto bg-green-600 hover:bg-green-700 text-white font-black py-4 px-10 rounded-2xl text-xl mb-6 shadow-[0_0_20px_rgba(22,163,74,0.4)] transition-all hover:scale-105 active:scale-95"
         >
-          Enter Full Screen Mode (Press F)
+          PLAY FULL SCREEN (PRESS F)
         </button>
 
-        <div className="text-center text-white bg-blue-900 p-3 rounded-lg mb-6 max-w-lg mx-auto border border-blue-700">
-          Optimized for <strong>no download</strong> play on any <strong>Chromebook</strong>! No lag, pure immersion.
+        <div className="text-center text-white bg-blue-900/40 p-3 rounded-xl mb-6 max-w-lg mx-auto border border-blue-500/30 backdrop-blur-sm">
+          <p className="text-xs uppercase tracking-widest font-bold">
+            Optimized for <strong>no download</strong> play on any <strong>Chromebook</strong>! High-FPS Mode Enabled.
+          </p>
         </div>
 
-        <div className="bg-black relative aspect-video w-full rounded-xl overflow-hidden shadow-2xl border border-gray-800">
+        <div className="bg-black relative aspect-video w-full rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-gray-800">
           <iframe 
             src={game.url} 
             className="w-full h-full border-none"
@@ -151,32 +157,57 @@ const GamePlayer: React.FC<{ game: Game, onBack: () => void }> = ({ game, onBack
           />
         </div>
 
-        <div className="ad-bottom mt-8 text-center min-h-[100px]">
-          <AdBanner slot="bottom-ad-player" />
+        {/* Strategic AdSense Placement Below Game */}
+        <div className="ad-bottom mt-10 text-center min-h-[100px] bg-gray-900/30 rounded-2xl border border-dashed border-gray-800 p-4">
+          <p className="text-[9px] text-gray-600 uppercase mb-2 tracking-[0.2em]">Advertisement</p>
+          <AdBanner slot="below-player-2026-premium" />
         </div>
 
-        <div className="strategy mt-8 text-gray-300 p-6 bg-gray-900 border border-gray-800 rounded-xl leading-relaxed">
-          <h3 className="text-xl font-bold text-white mb-4">Mastery Guide: {game.title} Unblocked 2026</h3>
-          <p className="mb-4">
-            Looking for the definitive <strong>unblocked games 2026 school chromebook no download</strong> experience? This version of {game.title} is specifically tuned for low-latency performance on student laptops. In 2026, our servers have been upgraded to bypass the newest firewall updates, ensuring you can play your favorite titles without interruption.
+        <div className="strategy mt-10 text-gray-400 p-8 bg-gray-900/50 border border-gray-800 rounded-2xl leading-relaxed shadow-inner">
+          <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter italic">Pro Mastery: {game.title} (2026 Edition)</h3>
+          <p className="mb-6">
+            Welcome to the definitive source for <strong>unblocked games 2026 school chromebook no download free play</strong>. This version of {game.title} is specifically architected to bypass modern school network restrictions while maintaining zero-lag performance on lower-end Chromebook hardware. Our 2026 server cluster ensures that you get <strong>free play</strong> access without any hidden costs or annoying downloads.
           </p>
-          <p className="mb-4">
-            <strong>School Hack:</strong> If the game feels slow, try clearing your browser cache. This "no download" version runs entirely in your RAM, making it the perfect choice for restricted Chromebook environments where installing software is prohibited.
-          </p>
-          <div className="border-t border-gray-800 pt-4 text-sm text-gray-400 italic">
-            Keywords: unblocked games 2026, school chromebook games, no download browser games, drift hunters max 2026 guide.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-gray-800/50 p-5 rounded-xl border border-gray-700">
+               <h4 className="text-blue-400 font-black mb-2 uppercase text-xs tracking-widest">School Chromebook Optimization</h4>
+               <p className="text-sm">Our "no download" tech loads assets directly into the browser cache, bypassing the need for local storage. This is perfect for restricted <strong>school chromebooks</strong> that block file downloads.</p>
+            </div>
+            <div className="bg-gray-800/50 p-5 rounded-xl border border-gray-700">
+               <h4 className="text-purple-400 font-black mb-2 uppercase text-xs tracking-widest">2026 Performance Secrets</h4>
+               <p className="text-sm">For {game.title}, we recommend using Chrome's "Hardware Acceleration" mode. This allows the game to tap into the integrated GPU of your 2026-era laptop for silky smooth 60fps action.</p>
+            </div>
+          </div>
+          <div className="mt-8 pt-6 border-t border-gray-800 flex flex-wrap gap-2">
+            <span className="text-[10px] bg-gray-800 px-3 py-1 rounded-full text-gray-500 font-mono">#unblocked-games-2026</span>
+            <span className="text-[10px] bg-gray-800 px-3 py-1 rounded-full text-gray-500 font-mono">#school-chromebook-hacks</span>
+            <span className="text-[10px] bg-gray-800 px-3 py-1 rounded-full text-gray-500 font-mono">#no-download-gaming</span>
           </div>
         </div>
 
-        <div className="other-games mt-8 bg-gray-900 p-6 rounded-xl border border-gray-800">
-          <h3 className="text-xl font-bold text-white mb-4 border-b border-gray-800 pb-2">Top 2026 Student Picks</h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 list-none">
-              <li><a href="https://driftbest2025.site" className="text-blue-400 hover:text-blue-300 font-medium">Drift Hunters MAX 2026 Unblocked</a></li>
-              <li><a href="https://slope2025.online" className="text-blue-400 hover:text-blue-300 font-medium">Slope Game 2026 No Download</a></li>
-              <li><a href="https://retrobowl2025.online" className="text-blue-400 hover:text-blue-300 font-medium">Retro Bowl School Edition 2026</a></li>
-              <li><a href="https://1v1lol2025.online" className="text-blue-400 hover:text-blue-300 font-medium">1v1.LOL Chromebook Optimized</a></li>
-              <li><a href="https://snakegame.cfd" className="text-blue-400 hover:text-blue-300 font-medium">Snake Game Unblocked 2026</a></li>
+        <div className="other-games mt-10 bg-gray-900 p-8 rounded-2xl border border-gray-800 shadow-2xl">
+          <h3 className="text-xl font-black text-white mb-6 border-b border-gray-800 pb-4 uppercase tracking-tighter">Recommended for Students (2026)</h3>
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 list-none">
+              <li><a href="https://driftbest2025.site" className="text-blue-400 hover:text-white transition-all font-bold flex items-center bg-gray-800/40 p-3 rounded-lg border border-transparent hover:border-blue-500">
+                <span className="mr-2">🔥</span> Drift Hunters MAX Unblocked
+              </a></li>
+              <li><a href="https://slope2025.online" className="text-blue-400 hover:text-white transition-all font-bold flex items-center bg-gray-800/40 p-3 rounded-lg border border-transparent hover:border-blue-500">
+                <span className="mr-2">🚀</span> Slope Game 2026 Free Play
+              </a></li>
+              <li><a href="https://retrobowl2025.online" className="text-blue-400 hover:text-white transition-all font-bold flex items-center bg-gray-800/40 p-3 rounded-lg border border-transparent hover:border-blue-500">
+                <span className="mr-2">🏈</span> Retro Bowl School Chromebook
+              </a></li>
+              <li><a href="https://1v1lol2025.online" className="text-blue-400 hover:text-white transition-all font-bold flex items-center bg-gray-800/40 p-3 rounded-lg border border-transparent hover:border-blue-500">
+                <span className="mr-2">🔫</span> 1v1.LOL No Download 2026
+              </a></li>
+              <li><a href="https://snakegame.cfd" className="text-blue-400 hover:text-white transition-all font-bold flex items-center bg-gray-800/40 p-3 rounded-lg border border-transparent hover:border-blue-500">
+                <span className="mr-2">🐍</span> Snake Game Unblocked
+              </a></li>
           </ul>
+        </div>
+        
+        <div className="mt-16 mb-8 text-center text-[10px] text-gray-700 uppercase tracking-[0.5em] font-black">
+          Powered by Ultra-Latency CDN v2026.04
         </div>
       </div>
     </div>
@@ -195,67 +226,92 @@ const App: React.FC = () => {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen font-sans text-gray-100 bg-[#0f172a]">
+    <div className="min-h-screen font-sans text-gray-100 bg-[#0f172a] selection:bg-blue-500 selection:text-white">
       {selectedGame ? (
         <GamePlayer game={selectedGame} onBack={() => setSelectedGame(null)} />
       ) : (
         <>
           <Header onSearch={setSearchTerm} />
           <main className="pb-20">
-            <AdBanner slot="top-home-banner" />
+            <AdBanner slot="top-home-hero-2026" />
             
-            <div className="max-w-7xl mx-auto px-4 mb-6 flex items-center justify-between">
-              <h2 className="text-2xl font-black border-l-4 border-blue-500 pl-4 uppercase tracking-tight">
-                Trending 2026 Picks
+            <div className="max-w-7xl mx-auto px-4 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <h2 className="text-3xl font-black border-l-8 border-blue-500 pl-4 uppercase tracking-tighter italic">
+                Trending 2026 Games
               </h2>
-              <div className="hidden sm:flex space-x-2 text-[10px] font-bold text-gray-500 uppercase">
-                <span>Fast</span>
-                <span className="text-blue-500">•</span>
-                <span>Unblocked</span>
-                <span className="text-blue-500">•</span>
-                <span>Safe</span>
+              <div className="flex space-x-3 text-[10px] font-black text-gray-500 uppercase tracking-widest">
+                <span className="bg-gray-800 px-3 py-1 rounded">Fast CDN</span>
+                <span className="bg-gray-800 px-3 py-1 rounded">No Login</span>
+                <span className="bg-blue-600 text-white px-3 py-1 rounded">Verified 2026</span>
               </div>
             </div>
 
             <GameGrid games={filteredGames} onSelect={setSelectedGame} />
             
-            <AdBanner slot="middle-grid-ad" />
+            <div className="max-w-7xl mx-auto px-4 mt-20">
+               <AdBanner slot="middle-grid-discovery" />
+            </div>
 
-            <div className="max-w-7xl mx-auto px-4 mt-16 py-12 border-t border-gray-800 bg-gray-900/50 rounded-2xl shadow-inner">
-              <h3 className="text-2xl font-black text-white mb-6 uppercase tracking-tighter">
-                The Future of Unblocked Games 2026 (School Chromebook)
+            <div className="max-w-7xl mx-auto px-4 mt-20 py-16 border-t border-gray-800 bg-gray-900/30 rounded-[2.5rem] shadow-2xl overflow-hidden relative">
+              <div className="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
+                 <h4 className="text-[12rem] font-black uppercase tracking-tighter leading-none select-none">2026</h4>
+              </div>
+              
+              <h3 className="text-4xl font-black text-white mb-10 uppercase tracking-tighter italic text-center md:text-left">
+                The 2026 Evolution of Unblocked Gaming
               </h3>
-              <div className="grid md:grid-cols-2 gap-8 text-sm text-gray-400 leading-relaxed">
-                <div>
-                  <p className="mb-4">
-                    Welcome to the premier destination for <strong>unblocked games 2026 school chromebook no download</strong>. As we move into the 2026 academic year, school filters are becoming more sophisticated. Our engineering team at <strong>DriftBest2025.site</strong> stays ahead of the curve by utilizing decentralized hosting and advanced proxy techniques to ensure your access to Drift Hunters MAX, Slope, and 1v1.LOL remains 100% stable.
+              
+              <div className="grid md:grid-cols-2 gap-12 text-base text-gray-400 leading-relaxed relative z-10">
+                <div className="space-y-6">
+                  <p className="">
+                    Welcome to the 2026 standard for <strong>unblocked games 2026 school chromebook no download free play</strong>. We have completely reimagined how student gaming works on school networks. By utilizing decentralized edge computing, we ensure that every title on <strong>DriftBest2025.site</strong> remains active even when main hubs are restricted.
                   </p>
-                  <p>
-                    Every game on this portal is a <strong>no download</strong> version, meaning it runs directly in your browser without leaving a footprint on your device. This makes it the safest and most efficient way to play during breaks on restricted hardware.
+                  <p className="bg-blue-500/5 p-6 rounded-2xl border border-blue-500/10 italic">
+                    "Our mission for 2026 is simple: provide the fastest <strong>free play</strong> environment for Chromebook users without requiring a single file download."
                   </p>
                 </div>
-                <div>
-                  <p className="mb-4">
-                    Why choose our 2026 platform? We offer ultra-lightweight game instances specifically optimized for <strong>school Chromebooks</strong> with limited CPU power. Our "Turbo Mode" architecture reduces memory usage by 40%, preventing the common "Out of Memory" errors found on other unblocked sites.
+                
+                <div className="space-y-6">
+                  <p>
+                    Why settle for legacy sites? Our 2026 platform is the only one optimized for the newest <strong>Chromebook</strong> operating systems. We've eliminated the "Shockwave" and "Flash" legacy issues, moving 100% to WebAssembly and WebGL for native performance. 
                   </p>
-                  <ul className="space-y-2 text-blue-400 font-medium">
-                    <li>✓ No Download Required</li>
-                    <li>✓ Works on Restricted School WiFi</li>
-                    <li>✓ 2026 Firewall Bypass Ready</li>
-                    <li>✓ 60 FPS on any Chromebook</li>
-                  </ul>
+                  <div className="grid grid-cols-2 gap-4 pt-4">
+                    <div className="flex flex-col">
+                       <span className="text-white font-black text-2xl tracking-tighter">0 MB</span>
+                       <span className="text-[10px] uppercase font-bold text-gray-600">Download Size</span>
+                    </div>
+                    <div className="flex flex-col">
+                       <span className="text-white font-black text-2xl tracking-tighter">60 FPS</span>
+                       <span className="text-[10px] uppercase font-bold text-gray-600">On any School WiFi</span>
+                    </div>
+                    <div className="flex flex-col">
+                       <span className="text-white font-black text-2xl tracking-tighter">100%</span>
+                       <span className="text-[10px] uppercase font-bold text-gray-600">Chromebook Native</span>
+                    </div>
+                    <div className="flex flex-col">
+                       <span className="text-white font-black text-2xl tracking-tighter">FREE</span>
+                       <span className="text-[10px] uppercase font-bold text-gray-600">No Premium Tiers</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </main>
-          <footer className="bg-gray-950 p-8 text-center border-t border-gray-900">
-            <div className="text-gray-400 text-xs uppercase tracking-widest font-bold mb-4">
-              © 2026 UNBLOCKED GAMES HUB • DRIFTBEST2025.SITE • NO DOWNLOAD GAMING
-            </div>
-            <div className="flex justify-center space-x-6 text-[10px] text-gray-600 uppercase">
-              <a href="#" className="hover:text-blue-500 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-blue-500 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-blue-500 transition-colors">Contact US</a>
+          
+          <footer className="bg-gray-950 p-12 text-center border-t border-gray-900 mt-20">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-gray-400 text-[11px] uppercase tracking-[0.4em] font-black mb-8">
+                © 2026 UNBLOCKED GAMES PREMIUM • DRIFTBEST2025.SITE • NO DOWNLOAD PORTAL
+              </div>
+              <div className="flex flex-wrap justify-center gap-8 text-[10px] text-gray-600 uppercase font-black">
+                <a href="#" className="hover:text-blue-500 transition-colors border-b border-gray-800 pb-1">Privacy Engine</a>
+                <a href="#" className="hover:text-blue-500 transition-colors border-b border-gray-800 pb-1">Terms of Play</a>
+                <a href="#" className="hover:text-blue-500 transition-colors border-b border-gray-800 pb-1">DMCA Portal</a>
+                <a href="#" className="hover:text-blue-500 transition-colors border-b border-gray-800 pb-1">Contact Dev</a>
+              </div>
+              <p className="mt-10 text-[9px] text-gray-800 leading-relaxed max-w-2xl mx-auto">
+                Legal: DriftBest2025.site is an independent repository for unblocked web assets. All trademarks remain property of their respective owners. Safe for school environments.
+              </p>
             </div>
           </footer>
         </>
